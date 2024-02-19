@@ -1,0 +1,116 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns = "http://www.w3.org/1999/xhtml"
+ 	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	
+<h:head>
+	<title>Transakcija stranica</title>
+</h:head>
+
+   <h:body>
+      <h2>BANKA</h2>
+      <hr />
+         <h3>Transakcija</h3>
+      
+      <h:form>
+         <h4>Izvrsiti transfer novca</h4>
+         <h:form>
+		<h:panelGrid columns="2" cellpadding="5">
+      <p:outputLabel value="Id primaoca: "/>
+      <div>
+      <p:inputText value="#{transakcijaController.idprimaocanovo}"></p:inputText>
+      </div>
+      <div>
+      <p:outputLabel value="Id posiljaoca:"/>
+      </div>
+      <div>
+      <p:inputText value="#{transakcijaController.idposiljaocanovo}"></p:inputText>
+      </div>
+      <div>
+          <p:outputLabel value="Iznos novca za transfer:"/>
+      </div>
+      <div>
+      <p:inputText value="#{transakcijaController.iznosnovo}"></p:inputText>
+      </div>
+      <div>
+      <p:outputLabel value="Status potvrde transakcije: "/>
+      </div>
+      <div>
+      <p:inputText value="#{transakcijaController.statusnovo}"></p:inputText>
+      </div>
+      
+      
+ <h:commandButton value="DodajTransakciju" action="#{transakcijaController.dodajTransakcija(transakcijaController.idprimaocanovo, transakcijaController.idposiljaocanovo,transakcijaController.iznosnovo,transakcijaController.statusnovo)}"></h:commandButton>
+                </h:panelGrid>
+                <h:dataTable value="#{transakcijaController.listTransakcija()}" var="e"
+    			styleClass="order-table"
+    			headerClass="order-table-header"
+    			rowClasses="order-table-odd-row,order-table-even-row"
+    			style="color:white;font-size:23px;font-weight:bold; margin-top:30px;text-shadow: 1px 1px 2px black, 0 0 15px white, 0 0 5px white; border:3px solid #e5e840; background-color:rgba(250, 20, 168,0.6);text-align:center; border-spacing: 5px; width:80%; margin-left:10%;">
+    	
+    		<h:column >
+    			<f:facet  name="header">
+    				Id
+    			</f:facet>
+    			<h:outputText value="#{e.id}"/>
+    		</h:column>
+ 
+    		<h:column>
+    			<f:facet name="header">
+    				Id-primaoca
+				</f:facet>
+    			<h:outputText value="#{e.idprimaoca}"/>
+    		</h:column>
+
+    		<h:column>
+    			<f:facet name="header">
+    				Id-posiljaoca
+				</f:facet>
+    			<h:outputText value="#{e.idposiljaoca}"/>
+    		</h:column>
+    		
+    		
+    		<h:column>
+    			<f:facet name="header">
+    				Iznos prenosa
+				</f:facet>
+    			<h:outputText value="#{e.iznos}"/>
+    		</h:column>
+    		<h:column>
+    			<f:facet name="header">
+    				Status transfera
+				</f:facet>
+    			<h:outputText value="#{e.status}"/>
+    		</h:column>
+    		<h:column>
+    			<f:facet name="header">
+    				Komentar
+				</f:facet>
+    			<h:outputText value="#{e.komentar}"/>
+    		</h:column>
+    		
+    	
+    	</h:dataTable>
+    	<p></p>
+    	<p:outputLabel value="Id za brisanje: " />	
+			<p:inputText value="#{transakcijaController.idbrisanje}"></p:inputText>
+			<p:outputLabel></p:outputLabel>
+			<p:commandButton value="Obrisi"
+				action="#{transakcijaController.removeTransakcija(transakcijaController.idbrisanje)}"></p:commandButton>
+		
+      </h:form>
+
+     
+         
+         
+       </h:form>
+       <h4>Povratak na stranu klijenata</h4>
+        <div>
+             <h:button value="Klijenti" outcome="home.xhtml" />
+         </div>
+   </h:body>
+</html>

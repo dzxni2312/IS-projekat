@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://xmlns.jcp.org/jsf/html">
+<h:head>
+	<title>Klijent stranica</title>
+</h:head>
+<h:body>
+<h2>BANKA</h2>
+<hr />
+         <h3>Dodavanje klijenata i njihovo azuriranje</h3>
+	<h:form>
+		<h:panelGrid columns="2" cellpadding="5"
+		style="">
+			<p:outputLabel value="Ime" />
+			<p:inputText value="#{klijentController.klijent.ime}"></p:inputText>
+			
+			<p:outputLabel value="Adresa" />
+			<p:inputText value="#{klijentController.klijent.adresa}"></p:inputText>
+			
+			<p:outputLabel value="Stanje racuna" />
+			<p:inputText value="#{klijentController.klijent.stanjeracuna}"></p:inputText>
+			<p:outputLabel></p:outputLabel>
+			
+			<p:commandButton value="Sacuvaj"
+				action="#{klijentController.saveKlijent(klijentController.klijent)}"></p:commandButton>
+			
+			<p:outputLabel value="Id za brisanje" />	
+			<p:inputText value="#{klijentController.id}"></p:inputText>
+			<p:outputLabel></p:outputLabel>
+			<p:commandButton value="Obrisi"
+				action="#{klijentController.removeKlijent(klijentController.id)}"></p:commandButton>
+	
+			<p:outputLabel value="Id za promenu stanja racuna" />	
+			<p:inputText value="#{klijentController.sid}"></p:inputText>
+		    <p:outputLabel value="Novo stanje racuna" />	
+			<p:inputText value="#{klijentController.novostanjeracuna}"></p:inputText>
+			<p:outputLabel></p:outputLabel>
+			<p:commandButton value="Promeni"
+				action="#{klijentController.updateKlijent(klijentController.sid, klijentController.novostanjeracuna)}"></p:commandButton>
+	
+
+	 
+	
+		</h:panelGrid>
+		
+		
+		<h:dataTable value="#{klijentController.listKlijenata()}" var="e"
+    			styleClass="order-table"
+    			headerClass="order-table-header"
+    			rowClasses="order-table-odd-row,order-table-even-row"
+    			style="color:white;font-size:23px;font-weight:bold; margin-top:30px;text-shadow: 1px 1px 2px black, 0 0 15px white, 0 0 5px white; border:3px solid #e5e840; background-color:rgba(250, 20, 168,0.6);text-align:center; border-spacing: 5px; width:80%; margin-left:10%;">
+    	
+    		<h:column >
+    			<f:facet  name="header">
+    				Id
+    			</f:facet>
+    			<h:outputText value="#{e.id}"/>
+    		</h:column>
+ 
+    		<h:column>
+    			<f:facet name="header">
+    				Ime
+				</f:facet>
+    			<h:outputText value="#{e.ime}"/>
+    		</h:column>
+
+    		<h:column>
+    			<f:facet name="header">
+    				Adresa
+				</f:facet>
+    			<h:outputText value="#{e.adresa}"/>
+    		</h:column>
+    		
+    		
+    		<h:column>
+    			<f:facet name="header">
+    				Stanje racuna
+				</f:facet>
+    			<h:outputText value="#{e.stanjeracuna}"/>
+    		</h:column>
+    	
+    	</h:dataTable>
+		
+		
+	</h:form>
+	<h4>Ukoliko zelite da izvrsite transakciju novca</h4>
+        <div>
+             <h:button value="Transakcija" outcome="transakcija.xhtml" />
+         </div>
+</h:body>
+</html>
